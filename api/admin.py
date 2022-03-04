@@ -11,7 +11,7 @@ from .models import (
     )
 
 class CategoryAdmin(TranslatableAdmin):
-    list_display = '__all__'
+    list_display = ('name',)
     fieldsets = (
         (None, {
             'fields': ('name', 'description'),
@@ -27,7 +27,7 @@ class CharacteristicInlineAdmin(TranslatableStackedInline):
 
 class ProductAdmin(TranslatableAdmin):
     inlines = [CharacteristicInlineAdmin]
-    list_display = '__all__'
+    list_display = ('name', 'category',)
     fieldsets = (
         (None, {
             'fields': ('name', 'description'),
@@ -37,7 +37,7 @@ class ProductAdmin(TranslatableAdmin):
 admin.site.register(Product, ProductAdmin)
 
 class ProjectAdmin(TranslatableAdmin):
-    list_display = '__all__'
+    list_display = ('name',)
     fieldsets = (
         (None, {
             'fields': ('name', 'description', 'text'),
@@ -47,7 +47,7 @@ class ProjectAdmin(TranslatableAdmin):
 admin.site.register(Project, ProjectAdmin)
 
 class InfoAdmin(TranslatableAdmin):
-    list_display = '__all__'
+    list_display = ('address',)
     fieldsets = (
         (None, {
             'fields': ('schedule1', 'schedule2', 'address'),
