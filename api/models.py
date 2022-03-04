@@ -6,10 +6,14 @@ from parler.models import TranslatableModel, TranslatedFields
 class Category(TranslatableModel):
     translations = TranslatedFields(
         name = models.CharField(_("Name"), max_length=100),
-        description = models.TextField(_("Description"), null=True, blank=True)
+        description = models.TextField(_("Description"), null=True, blank=True),
     )
 
     img = models.ImageField(null=False, upload_to='category_pics')
+
+    class Meta:
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
 
     def __str__(self):
         return self.name
@@ -67,3 +71,10 @@ class Info(TranslatableModel):
     phone2 = models.CharField(max_length=20, null=True, blank=True)
     email1 = models.CharField(max_length=320, null=True, blank=True)
     email2 = models.CharField(max_length=320, null=True, blank=True)
+
+    class Meta:
+        verbose_name = _("Info")
+        verbose_name_plural = _("Info")
+    
+    def __str__(self):
+        return 'Info'
