@@ -31,7 +31,7 @@ class ProductAdmin(TranslatableAdmin):
     list_display = ('name', 'category',)
     fieldsets = (
         (None, {
-            'fields': ('name', 'description', 'category', 'imgs'),
+            'fields': ('name', 'description', 'category', 'main_img', 'imgs'),
         }),
     )
 

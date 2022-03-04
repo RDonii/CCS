@@ -25,6 +25,7 @@ class Product(TranslatableModel):
     )
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    main_img = models.ImageField(null=False, upload_to='product_pics')
     imgs = models.FileField(null=False, upload_to='product_pics')
 
     def __str__(self):
@@ -37,6 +38,9 @@ class Characteristic(TranslatableModel):
     )
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.key
 
 class Project(TranslatableModel):
     translations = TranslatedFields(
@@ -56,9 +60,15 @@ class Brand(models.Model):
     img = models.ImageField(null=False, upload_to='brand_pics')
     link = models.CharField(max_length=200, null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
 class Certificate(models.Model):
     title = models.CharField(max_length=150)
     img = models.ImageField(null=False, upload_to='certificate_pics')
+
+    def __str__(self):
+        return self.title
 
 class Info(TranslatableModel):
     translations = TranslatedFields(
