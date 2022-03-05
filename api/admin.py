@@ -4,11 +4,13 @@ from parler.admin import TranslatableStackedInline, TranslatableAdmin
 from .models import (
     Category,
     Product,
+    ProductImgs,
     Characteristic,
     Project,
+    ProjectImgs,
     Brand,
     Certificate,
-    Info
+    Info,
     )
 
 class CategoryAdmin(TranslatableAdmin):
@@ -21,27 +23,37 @@ class CategoryAdmin(TranslatableAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 
-#inline for product
+#inlines
 class CharacteristicInlineAdmin(TranslatableStackedInline):
     model = Characteristic
     extra = 0
 
+class ProductImgsInlineAdmin(admin.StackedInline):
+    model = ProductImgs
+    extra = 0
+    verbose_name = 'Foto'
+
+class ProjectImgsInlineAdmin(admin.StackedInline):
+    model = ProjectImgs
+    extra = 0
+
 class ProductAdmin(TranslatableAdmin):
-    inlines = [CharacteristicInlineAdmin]
+    inlines = [ProductImgsInlineAdmin, CharacteristicInlineAdmin]
     list_display = ('name', 'category',)
     fieldsets = (
         (None, {
-            'fields': ('name', 'description', 'category', 'main_img', 'imgs'),
+            'fields': ('name', 'description', 'category', 'main_img',),
         }),
     )
 
 admin.site.register(Product, ProductAdmin)
 
 class ProjectAdmin(TranslatableAdmin):
+    inlines = [ProjectImgsInlineAdmin]
     list_display = ('name',)
     fieldsets = (
         (None, {
-            'fields': ('name', 'description', 'text', 'main_img', 'imgs'),
+            'fields': ('name', 'description', 'text', 'main_img',),
         }),
     )
 
