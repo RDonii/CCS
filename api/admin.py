@@ -38,6 +38,7 @@ class ProjectImgsInlineAdmin(admin.StackedInline):
     extra = 0
 
 class ProductAdmin(TranslatableAdmin):
+    list_filter = ('category',)
     inlines = [ProductImgsInlineAdmin, CharacteristicInlineAdmin]
     list_display = ('name', 'category',)
     fieldsets = (
