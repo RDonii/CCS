@@ -1,1 +1,1 @@
-web: gunicorn ccs.wsgi
+web: gunicorn CCS.wsgi
