@@ -31,7 +31,6 @@ class CharacteristicInlineAdmin(TranslatableStackedInline):
 class ProductImgsInlineAdmin(admin.StackedInline):
     model = ProductImgs
     extra = 0
-    verbose_name = 'Foto'
 
 class ProjectImgsInlineAdmin(admin.StackedInline):
     model = ProjectImgs
@@ -93,3 +92,7 @@ admin.site.register(Certificate)
 #unregister groups and users models
 admin.site.unregister(User)
 admin.site.unregister(Group)
+
+
+admin.site.site_title = "Административный сайт CCS"
+admin.site.site_header = "Comfort Cooling Service"
