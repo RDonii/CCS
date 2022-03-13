@@ -45,21 +45,6 @@ class ProductImgs(models.Model):
     def __str__(self):
         return str(self.pk)
 
-class Characteristic(TranslatableModel):
-    translations = TranslatedFields(
-        key = models.CharField("название", max_length=50),
-        value = models.CharField("значение", max_length=50)
-    )
-
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name = 'Товар')
-
-    class Meta:
-        verbose_name = 'характеристика'
-        verbose_name_plural = 'характеристика'
-
-    def __str__(self):
-        return self.key
-
 class Project(TranslatableModel):
     translations = TranslatedFields(
         name = models.CharField("Название", max_length=200),

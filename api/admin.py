@@ -5,7 +5,6 @@ from .models import (
     Category,
     Product,
     ProductImgs,
-    Characteristic,
     Project,
     ProjectImgs,
     Brand,
@@ -24,9 +23,6 @@ class CategoryAdmin(TranslatableAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 #inlines
-class CharacteristicInlineAdmin(TranslatableStackedInline):
-    model = Characteristic
-    extra = 0
 
 class ProductImgsInlineAdmin(admin.StackedInline):
     model = ProductImgs
@@ -38,7 +34,7 @@ class ProjectImgsInlineAdmin(admin.StackedInline):
 
 class ProductAdmin(TranslatableAdmin):
     list_filter = ('category',)
-    inlines = [ProductImgsInlineAdmin, CharacteristicInlineAdmin]
+    inlines = [ProductImgsInlineAdmin]
     list_display = ('name', 'category',)
     fieldsets = (
         (None, {

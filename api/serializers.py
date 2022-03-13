@@ -1,16 +1,17 @@
 from rest_framework.serializers import ModelSerializer
 from parler_rest.serializers import TranslatableModelSerializer
 from parler_rest.fields import TranslatedFieldsField
-from .models import Category, Product, ProductImgs, Characteristic, Brand, Certificate, Project, ProjectImgs, Info
+from .models import Category, Product, ProductImgs, Brand, Certificate, Project, ProjectImgs, Info
+from .mixins import TranslatedSerializerMixin
 
-class CategorySerializer(TranslatableModelSerializer):
+class CategorySerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Category)
 
     class Meta:
         model = Category
         fields = '__all__'
 
-class ProductSerializer(TranslatableModelSerializer):
+class ProductSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Product)
 
     class Meta:
@@ -21,13 +22,6 @@ class ProductImgsSerializer(ModelSerializer):
 
     class Meta:
         model = ProductImgs
-        fields = '__all__'
-
-class CharacteristicSerializer(TranslatableModelSerializer):
-    translations = TranslatedFieldsField(shared_model=Characteristic)
-
-    class Meta:
-        model = Characteristic
         fields = '__all__'
 
 class BrandSerializer(ModelSerializer):
@@ -42,7 +36,7 @@ class CertificateSerializer(ModelSerializer):
         model = Certificate
         fields = '__all__'
 
-class ProjectSerializer(TranslatableModelSerializer):
+class ProjectSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Project)
 
     class Meta:
@@ -55,7 +49,7 @@ class ProjectImgsSerializer(ModelSerializer):
         model = ProjectImgs
         fields = '__all__'
 
-class InfoSerializer(TranslatableModelSerializer):
+class InfoSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Info)
 
     class Meta:
