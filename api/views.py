@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import filters
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Category, Product, ProductImgs, Brand, Certificate, Project, ProjectImgs, Info
 from .mixins import TranslatedViewMixin
@@ -14,10 +13,33 @@ from .serializers import (
     InfoSerializer
 )
 
+from rest_framework.views import APIView
+from django.http import HttpResponse, JsonResponse
+from rest_framework.response import Response
+
+
+def searching(request, lang):
+        word = request.GET.get('search')
+        categories_query = Category.objects.filter(translations__name__icontains=word)
+        products_query = Product.objects.filter(translations__name__icontains=word)
+        projects_query = Project.objects.filter(translations__name__icontains=word)
+
+        #adding lang to use in TranslatedSerializerMixin
+        categories = CategorySerializer(categories_query, many=True)
+        categories.context['kwargs'] = {'lang': lang}
+        products = ProductSerializer(products_query, many=True)
+        products.context['kwargs'] = {'lang': lang}
+        projects = ProjectSerializer(projects_query, many=True)
+        projects.context['kwargs'] = {'lang': lang}
+        
+        return JsonResponse({
+            'categories': categories.data,
+            'products': products.data,
+            'projects': projects.data
+        })
+
 class CategoryListView(TranslatedViewMixin, ListAPIView):
     
-    # search_fields = ['translations__uz__name', 'translations.ru.name', 'translations.en.name', 'product__name']
-    # filter_backends = (filters.SearchFilter,)
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
