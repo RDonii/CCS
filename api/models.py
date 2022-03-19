@@ -98,7 +98,10 @@ class Info(TranslatableModel):
     translations = TranslatedFields(
         schedule1 = models.CharField("Рабочее расписание 1", max_length=300, null=True, blank=True),
         schedule2 = models.CharField("Рабочее расписание 2", max_length=300, null=True, blank=True),
-        address = models.CharField("Адрес", max_length=300, null=True, blank=True)
+        country = models.CharField("Страна", max_length=300, null=True, blank=True),
+        city = models.CharField("Город", max_length=300, null=True, blank=True),
+        district = models.CharField("Район", max_length=300, null=True, blank=True),
+        street = models.CharField("Улица с номером адресов", max_length=300, null=True, blank=True),
     )
 
     phone1 = models.CharField("Тел 1", max_length=20, null=True, blank=True)

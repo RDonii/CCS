@@ -56,17 +56,20 @@ class ProjectAdmin(TranslatableAdmin):
 admin.site.register(Project, ProjectAdmin)
 
 class InfoAdmin(TranslatableAdmin):
-    list_display = ('address',)
+    list_display = ('street', 'district', 'city')
     fieldsets = (
         (None, {
             'fields': (
                 'schedule1',
                 'schedule2',
-                'address',
+                'country',
+                'city',
+                'district',
+                'street',
                 'phone1',
                 'phone2',
                 'email1',
-                'email2'),
+                'email2',),
         }),
     )
 
