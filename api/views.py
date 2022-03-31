@@ -13,13 +13,17 @@ from .serializers import (
     InfoSerializer
 )
 
-from rest_framework.views import APIView
-from django.http import HttpResponse, JsonResponse
-from rest_framework.response import Response
+from django.http import JsonResponse
 
 
 def searching(request, lang):
         word = request.GET.get('search')
+        if not word:
+            return JsonResponse({
+            'categories': [],
+            'products': [],
+            'projects': []
+        })
         categories_query = Category.objects.filter(translations__name__icontains=word)
         products_query = Product.objects.filter(translations__name__icontains=word)
         projects_query = Project.objects.filter(translations__name__icontains=word)

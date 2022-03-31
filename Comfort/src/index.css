@@ -1,0 +1,25 @@
+
+*{
+  
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat' sans-serif;
+  font-style: normal;
+}
+
+body{
+  max-width: 1640px;
+  margin: 0 auto!important;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+  margin-bottom: 0;
+}
+p{
+  margin-bottom: 0;
+}
+
+.content-container{
+  padding-right: 100px;
+  padding-left: 100px;
+}

@@ -1,0 +1,151 @@
+main{
+    position: relative;
+}
+main #carousel h1{
+    position: absolute;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 61px;
+    letter-spacing: 0.05em;
+    width: 700px;
+    top: 550px;
+    left: 100px;
+}
+
+main .carousel-indicators{
+    position: absolute;
+}
+main .carousel-indicators li{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+main .carousel-control-prev{
+    position: absolute;
+    left: 80%;
+    top: 89%;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(221, 247, 240, 1) 0%, rgba(145, 241, 254, 0.5) 100%);
+    width: 40px;
+    height: 40px;
+}
+main .carousel-control-next{
+    position: absolute;
+    right: 10%;
+    top: 89%;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(221, 247, 240, 1) 0%, rgba(145, 241, 254, 0.5) 100%);
+    width: 40px;
+    height: 40px;
+}
+main .carousel-caption p{
+    display: none;
+    left: 5%;
+}
+main .carousel-caption h3{
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 61px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+
+@media only screen and (max-width: 992px){
+    main .carousel-caption h3 {
+        font-size: 30px;
+    }
+    main .carousel-control-prev{
+        width: 30px;
+        height: 30px;
+    }
+    main .carousel-control-next{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    main .carousel-caption h3 {
+        font-size: 25px;
+    }
+    .carousel-control-next-icon, .carousel-control-prev-icon {
+        width: 1rem;
+    }
+    main .carousel-control-prev{
+        width: 25px;
+        height: 25px;
+    }
+    main .carousel-control-next{
+        width: 25px;
+        height: 25px;
+    }
+}
+@media only screen and (max-width: 660px){
+    main .carousel-caption h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+}
+@media only screen and (max-width: 578px){
+    main .carousel-control-next {
+        position: absolute;
+        right: 7%;
+    }
+    main .carousel-caption h3 {
+        font-size: 17px;
+        line-height: 40px;
+    }
+    .carousel-indicators [data-bs-target] {
+        margin-left: 12px;
+        width: 15px;
+    }
+}
+@media only screen and (max-width: 500px){
+    main .carousel-control-next {
+        right: 10%;
+        top: 80%;
+    }
+    main .carousel-control-prev{
+        left: 74%;
+        top: 80%;
+    }
+    .carousel-control-next-icon, .carousel-control-prev-icon {
+        width: 0.5rem;
+    }
+    .carousel-caption {
+        left: 7%;
+    }
+    main .carousel-caption h3 {
+        font-size: 14px;
+        line-height: 30px;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    main .carousel-caption h3 {
+        font-size: 12px;
+        line-height: 25px;
+        margin-bottom: 15px;
+    }
+    main .carousel-control-prev{
+        width: 20px;
+        height: 20px;
+    }
+    main .carousel-control-next{
+        width: 20px;
+        height: 20px;
+    }
+    main .carousel-control-next {
+        top: 70%;
+    }
+    main .carousel-control-prev{
+        top: 70%;
+    }
+}
