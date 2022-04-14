@@ -1,4 +1,6 @@
+from email.policy import default
 from django.db import models
+from CCS import settings
 
 from django.utils.translation import gettext as _
 from parler.models import TranslatableModel, TranslatedFields
@@ -10,8 +12,11 @@ class Category(TranslatableModel):
     )
 
     img = models.ImageField( "Обложка", null=False, upload_to='category_pics')
+    created = models.DateField(_("Дата создания"), auto_now_add=True)
+    updated = models.DateField(_("Дата последнего обновления"), auto_now=True)
 
     class Meta:
+        ordering = ('-created',)
         verbose_name = "Каталог"
         verbose_name_plural = "Каталоги"
 
@@ -26,8 +31,11 @@ class Product(TranslatableModel):
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name = 'Каталог')
     main_img = models.ImageField("Обложка", null=False, upload_to='product_pics')
+    created = models.DateField(_("Дата создания"), auto_now_add=True)
+    updated = models.DateField(_("Дата последнего обновления"), auto_now=True)
 
     class Meta:
+        ordering = ('-created',)
         verbose_name = "Товар"
         verbose_name_plural = "Продукты"
 

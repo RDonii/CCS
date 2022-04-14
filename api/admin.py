@@ -13,7 +13,7 @@ from .models import (
     )
 
 class CategoryAdmin(TranslatableAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'created', 'updated')
     fieldsets = (
         (None, {
             'fields': ('name', 'description', 'img'),
@@ -35,7 +35,7 @@ class ProjectImgsInlineAdmin(admin.StackedInline):
 class ProductAdmin(TranslatableAdmin):
     list_filter = ('category',)
     inlines = [ProductImgsInlineAdmin]
-    list_display = ('name', 'category',)
+    list_display = ('name', 'category', 'created', 'updated')
     fieldsets = (
         (None, {
             'fields': ('name', 'description', 'category', 'main_img',),
