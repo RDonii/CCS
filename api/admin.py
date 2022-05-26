@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin import helpers
 from django.contrib.auth.models import User, Group
 from parler.admin import TranslatableAdmin
 from .models import (
@@ -86,7 +87,7 @@ class InfoAdmin(TranslatableAdmin):
 admin.site.register(Info, InfoAdmin)
 
 class CoverAdmin(TranslatableAdmin):
-    list_display = ('pk',)
+    list_display = ('text',)
     fieldsets = (
         (None, {
             'fields': (
@@ -96,8 +97,25 @@ class CoverAdmin(TranslatableAdmin):
     )
 
     #disabling to delete last object
+    min_objects = 1
+
     def has_delete_permission(self, request, obj=None):
-        return len(Cover.objects.all())>1
+        queryset = self.model.objects.all()
+
+        # If we're running the bulk delete action, estimate the number
+        # of objects after we delete the selected items
+        selected = request.POST.getlist(helpers.ACTION_CHECKBOX_NAME)
+        if selected:
+            queryset = queryset.exclude(pk__in=selected)
+
+        if queryset.count() < self.min_objects:
+            message = 'Должен остаться хотя бы {} объект.'
+            self.message_user(request, message.format(self.min_objects))
+            return False
+
+        return super(CoverAdmin, self).has_delete_permission(request, obj)
+
+admin.site.register(Cover, CoverAdmin)
 
 #untranslated models
 admin.site.register(Brand)

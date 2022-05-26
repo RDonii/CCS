@@ -138,5 +138,5 @@ class Cover(TranslatableModel):
         verbose_name = "Обложка"
         verbose_name_plural = "Обложки"
 
-    def __str__(self):
-        return self.pk
+    def str(self):
+        return self.text
