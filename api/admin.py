@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
-from parler.admin import TranslatableStackedInline, TranslatableAdmin
+from parler.admin import TranslatableAdmin
 from .models import (
     Category,
     Product,
@@ -10,6 +10,7 @@ from .models import (
     Brand,
     Certificate,
     Info,
+    Cover
     )
 
 class CategoryAdmin(TranslatableAdmin):
@@ -73,7 +74,7 @@ class InfoAdmin(TranslatableAdmin):
         }),
     )
 
-    #disabling to add
+    #disabling to add multiple object
     def has_add_permission(self, request, obj=None):
         if Info.objects.exists():
             return False
@@ -83,6 +84,20 @@ class InfoAdmin(TranslatableAdmin):
         return False
 
 admin.site.register(Info, InfoAdmin)
+
+class CoverAdmin(TranslatableAdmin):
+    list_display = ('pk',)
+    fieldsets = (
+        (None, {
+            'fields': (
+                'text',
+                'img',)
+        }),
+    )
+
+    #disabling to delete last object
+    def has_delete_permission(self, request, obj=None):
+        return len(Cover.objects.all())>1
 
 #untranslated models
 admin.site.register(Brand)

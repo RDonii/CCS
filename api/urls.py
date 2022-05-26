@@ -11,7 +11,8 @@ from .views import (
     ProjectListView,
     ProjectDetailView,
     ProjectImgsListView,
-    InfoListView
+    InfoListView,
+    CoverView
 )
 
 urlpatterns = [
@@ -27,4 +28,5 @@ urlpatterns = [
     path('projects/<int:pk>/', ProjectDetailView.as_view()),
     path('projects/<int:project_id>/imgs/', ProjectImgsListView.as_view()),
     path('info/', InfoListView.as_view()),
+    path('cover/', CoverView.as_view())
 ]

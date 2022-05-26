@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from .models import Category, Product, ProductImgs, Brand, Certificate, Project, ProjectImgs, Info
+from .models import Category, Product, ProductImgs, Brand, Certificate, Project, ProjectImgs, Info, Cover
 from .mixins import TranslatedViewMixin
 from .serializers import (
     CategorySerializer,
@@ -10,7 +10,8 @@ from .serializers import (
     CertificateSerializer,
     ProjectSerializer,
     ProjectImgsSerializer,
-    InfoSerializer
+    InfoSerializer,
+    CoverSerializer
 )
 
 from django.http import JsonResponse
@@ -95,3 +96,7 @@ class ProjectImgsListView(ListAPIView):
 class InfoListView(TranslatedViewMixin, ListAPIView):
     serializer_class = InfoSerializer
     queryset = Info.objects.all()
+
+class CoverView(TranslatedViewMixin, ListAPIView):
+    serializer_class = CoverSerializer
+    queryset = Cover.objects.all()

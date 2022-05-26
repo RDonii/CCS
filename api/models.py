@@ -123,3 +123,20 @@ class Info(TranslatableModel):
     
     def __str__(self):
         return 'Контакт'
+
+class Cover(TranslatableModel):
+    translations = TranslatedFields(
+        text = models.CharField("Техт", max_length=100, null=False, blank=False),
+    )
+
+    img = models.ImageField( "Обложка", null=False, upload_to='cover_pics')
+    created = models.DateField(_("Дата создания"), auto_now_add=True)
+    updated = models.DateField(_("Дата последнего обновления"), auto_now=True)
+
+    class Meta:
+        ordering = ('-created',)
+        verbose_name = "Обложка"
+        verbose_name_plural = "Обложки"
+
+    def __str__(self):
+        return self.pk
