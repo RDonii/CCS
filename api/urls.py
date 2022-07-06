@@ -1,5 +1,8 @@
 from django.urls import path
 from .views import (
+    BannerView,
+    IconTextView,
+    ServiceSloganView,
     searching,
     CategoryListView,
     CategoryDetailView,
@@ -28,5 +31,8 @@ urlpatterns = [
     path('projects/<int:pk>/', ProjectDetailView.as_view()),
     path('projects/<int:project_id>/imgs/', ProjectImgsListView.as_view()),
     path('info/', InfoListView.as_view()),
-    path('cover/', CoverView.as_view())
+    path('cover/', CoverView.as_view()),
+    path('banner/', BannerView.as_view()),
+    path('icon_text/', IconTextView.as_view()),
+    path('service_slogan/', ServiceSloganView.as_view())
 ]

@@ -140,3 +140,41 @@ class Cover(TranslatableModel):
 
     def str(self):
         return self.text
+
+class Banner(TranslatableModel):
+    translations = TranslatedFields(
+        title = models.CharField("Титул", max_length=100, null=False, blank=False),
+        text = models.TextField("Текст", null=False, blank=False),
+    )
+
+    class Meta:
+        verbose_name = "Баннер"
+        verbose_name_plural = "Баннеры"
+
+    def str(self):
+        return self.title
+    
+class IconText(TranslatableModel):
+    translations = TranslatedFields(
+        title = models.CharField("Титул", max_length=100, null=False, blank=False),
+        text = models.TextField("Текст", null=False, blank=False),
+    )
+
+    class Meta:
+        verbose_name = "Иконка Текст"
+        verbose_name_plural = "Иконка Текст"
+
+    def str(self):
+        return self.title
+
+class ServiceSlogan(TranslatableModel):
+    translations = TranslatedFields(
+        text = models.TextField("Текст", null=False, blank=False),
+    )
+
+    class Meta:
+        verbose_name = "Сервис слоган"
+        verbose_name_plural = "Сервис слоган"
+
+    def str(self):
+        return self.text

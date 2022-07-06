@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from parler_rest.serializers import TranslatableModelSerializer
 from parler_rest.fields import TranslatedFieldsField
-from .models import Category, Product, ProductImgs, Brand, Certificate, Project, ProjectImgs, Info, Cover
+from .models import Banner, Category, IconText, Product, ProductImgs, Brand, Certificate, Project, ProjectImgs, Info, Cover, ServiceSlogan
 from .mixins import TranslatedSerializerMixin
 
 class CategorySerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
@@ -61,4 +61,25 @@ class CoverSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
 
     class Meta:
         model = Cover
+        fields = '__all__'
+
+class BannerSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=Banner)
+
+    class Meta:
+        model = Banner
+        fields = ['title', 'text', 'translations']
+
+class IconTextSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=Cover)
+
+    class Meta:
+        model = IconText
+        fields = '__all__'
+
+class ServiceSloganSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=Cover)
+
+    class Meta:
+        model = ServiceSlogan
         fields = '__all__'

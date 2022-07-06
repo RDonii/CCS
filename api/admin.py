@@ -3,7 +3,9 @@ from django.contrib.admin import helpers
 from django.contrib.auth.models import User, Group
 from parler.admin import TranslatableAdmin
 from .models import (
+    Banner,
     Category,
+    IconText,
     Product,
     ProductImgs,
     Project,
@@ -11,7 +13,8 @@ from .models import (
     Brand,
     Certificate,
     Info,
-    Cover
+    Cover,
+    ServiceSlogan
     )
 
 class CategoryAdmin(TranslatableAdmin):
@@ -115,7 +118,96 @@ class CoverAdmin(TranslatableAdmin):
 
         return super(CoverAdmin, self).has_delete_permission(request, obj)
 
+    #disabling to delete last one
+    def has_delete_permission(self, request, obj=None):
+        if self.model.objects.count() == self.min_objects:
+            return False
+        return True
+
 admin.site.register(Cover, CoverAdmin)
+
+class BannerAdmin(TranslatableAdmin):
+    list_display = ('title',)
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title',
+                'text'),
+        }),
+    )
+
+    #disabling to add multiple object
+    def has_add_permission(self, request, obj=None):
+        if self.model.objects.exists():
+            return False
+        return True
+    #disabling to delete
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+admin.site.register(Banner, BannerAdmin)
+
+class IconTextAdmin(TranslatableAdmin):
+    list_display = ('title',)
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title',
+                'text',)
+        }),
+    )
+
+    #disabling to delete last object
+    min_objects = 2
+
+    def has_delete_permission(self, request, obj=None):
+        queryset = self.model.objects.all()
+
+        # If we're running the bulk delete action, estimate the number
+        # of objects after we delete the selected items
+        selected = request.POST.getlist(helpers.ACTION_CHECKBOX_NAME)
+        if selected:
+            queryset = queryset.exclude(pk__in=selected)
+
+        if queryset.count() < self.min_objects:
+            message = 'Должен остаться хотя бы {} объект.'
+            self.message_user(request, message.format(self.min_objects))
+            return False
+
+        return super(IconTextAdmin, self).has_delete_permission(request, obj)
+
+    #disabling to add more than 2 object
+    def has_add_permission(self, request, obj=None):
+        if self.model.objects.count()==2:
+            return False
+        return True
+    
+    #disabling to delete
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+admin.site.register(IconText, IconTextAdmin)
+
+class ServiceSloganAdmin(TranslatableAdmin):
+    list_display = ('text',)
+    fieldsets = (
+        (None, {
+            'fields': (
+                'text',),
+        }),
+    )
+
+    #disabling to add multiple object
+    def has_add_permission(self, request, obj=None):
+        if self.model.objects.exists():
+            return False
+        return True
+    #disabling to delete
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+admin.site.register(ServiceSlogan, ServiceSloganAdmin)
+
 
 #untranslated models
 admin.site.register(Brand)
