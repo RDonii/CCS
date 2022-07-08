@@ -71,14 +71,14 @@ class BannerSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
         fields = ['title', 'text', 'translations']
 
 class IconTextSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
-    translations = TranslatedFieldsField(shared_model=Cover)
+    translations = TranslatedFieldsField(shared_model=IconText)
 
     class Meta:
         model = IconText
         fields = '__all__'
 
 class ServiceSloganSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
-    translations = TranslatedFieldsField(shared_model=Cover)
+    translations = TranslatedFieldsField(shared_model=ServiceSlogan)
 
     class Meta:
         model = ServiceSlogan
